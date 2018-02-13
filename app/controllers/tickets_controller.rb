@@ -1,6 +1,11 @@
 class TicketsController < ApplicationController
+  
   def index
     @tickets = Ticket.all
-    @tickets.as_json
+  end
+
+
+  def show
+  	@ticket = Ticket.find(params[:id])
   end
 end
