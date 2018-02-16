@@ -8,4 +8,8 @@ class TicketsController < ApplicationController
   def show
   	@ticket = Ticket.find(params[:id])
   end
+
+  def complete
+  	Ticket.find(params[:id]).update(is_completed: true)
+  end
 end

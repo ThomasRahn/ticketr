@@ -9,6 +9,11 @@
   <div class="row justify-content-md-center">
     <div class="col col-lg-6">
       <h2><%= @ticket.task %></h2>
+
+
+      <% @ticket.comments.each do |comment| %>
+        <h3><%= comment.comment %>
+      <% end %>
     </div>
   </div>
 </div>

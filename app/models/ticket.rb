@@ -1,3 +1,3 @@
 class Ticket < ApplicationRecord
-  has_one :priority
+  has_many :comments
 end
