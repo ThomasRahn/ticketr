@@ -8,11 +8,12 @@
   <% @tickets.each do |ticket| %>
     <div class="row justify-content-md-center">
       <div class="col col-lg-6">
-        <h2><%= ticket.task %></h2>
+        <h2><%= link_to ticket.task, controller: "tickets", action: "show", id: ticket.id %></h2>
         <hr/>
         <p>
           <%= ticket.description %>
         </p>
+        
       </div>
     </div>
   <% end %>

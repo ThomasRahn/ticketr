@@ -4,6 +4,7 @@ class CreateTickets < ActiveRecord::Migration[5.1]
       t.string :task
       t.text :description
       t.boolean :is_completed
+      t.belongs_to :user, index: true
       t.timestamps
     end
   end
