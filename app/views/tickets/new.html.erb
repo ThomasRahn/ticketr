@@ -1,0 +1,23 @@
+<div class="row justify-content-md-center">
+  <div class="col col-lg-6">
+	<%= form_for @ticket, url: {action: "create"}, html: {class: "nifty_form"} do |t| %>
+		<% if @ticket.errors.any? %>
+			<% @ticket.errors.full_messages.each do |msg| %>
+				<div class='alert alert-danger'>
+					<%= msg %>
+				</div>
+			<% end %>
+		<% end %>
+
+	  <div class="form-group">
+	  	<%= label_tag(:task, "Task") %>
+	  	<%= t.text_field :task, class: "form-control" %>
+	  </div>
+	  <div class="form-group">
+	  	<%= label_tag(:task, "Description") %>
+	  	<%= t.text_area :description, size: "60x12", class: "form-control" %>
+	  </div>
+	  <%= t.submit "Create", class: "btn btn-primary" %>
+	<% end %>
+  </div>
+</div>

@@ -4,13 +4,39 @@
     <title>TicketR</title>
     <%= csrf_meta_tags %>
 
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <meta name="google-signin-scope" content="profile email">
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+    <meta name="google-signin-client_id" content="582016878041-ccofdhujomfc54dlvi47lde3clopqtho.apps.googleusercontent.com">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+    <script type="text/javascript">
+      function init() {
+        gapi.load('auth2', function() { 
+        });
+      }
+    </script>
+
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
   </head>
-
   <body>
-    <%= yield %>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">TicketR</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <%= link_to "Home", root_path, class: "nav-item nav-link active" %>
+            <%= link_to "New",{:controller => "tickets", :action => "new"}, { class: "nav-item nav-link"} %>
+          </div>
+        </div>
+      </nav>
+      <%= yield %>
+    </div>
   </body>
 </html>

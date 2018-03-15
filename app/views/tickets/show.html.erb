@@ -1,19 +1,33 @@
-<div clas="container-fluid">
-  <div class="row justify-content-md-center">
-    <div class="col col-lg-2">
-      <h1>Tickets</h1>
-    </div>
-  </div>
 
-
-  <div class="row justify-content-md-center">
-    <div class="col col-lg-6">
-      <h2><%= @ticket.task %></h2>
-
-
-      <% @ticket.comments.each do |comment| %>
-        <h3><%= comment.comment %>
-      <% end %>
-    </div>
+<div class="row justify-content-md-center">
+  <div class="col col-lg-2">
+    <h1>Ticket</h1>
   </div>
 </div>
+
+
+<div class="row justify-content-md-center">
+  <div class="col col-lg-6">
+    <h2><%= @ticket.task %></h2>
+
+    <a href="javascript:void(0)" onclick="complete(1);">FINISH</a>
+    <% @ticket.comments.each do |comment| %>
+      <h3><%= comment.comment %>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function complete(ticket_id){
+    $.ajax({
+      url : '/complete',
+      type : "POST",
+      data : {
+        id : ticket_id
+      },
+      success : function(data){
+        alert("good");
+      }
+    });
+  }
+</script>
