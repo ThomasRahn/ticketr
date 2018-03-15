@@ -3,4 +3,11 @@ Rails.application.routes.draw do
   
   resources :tickets
   resources :comments
+
+  get '/complete' => 'tickets#complete'
+  post '/complete' => 'tickets#complete'
+
+  post '/user/signup' => "users#google_sign_up"
+
+  root 'tickets#index'
 end
