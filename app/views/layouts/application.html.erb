@@ -35,10 +35,10 @@
             <%= link_to "New",{:controller => "tickets", :action => "new"}, { class: "nav-item nav-link"} %>
 
             <% if logged_in? %>
-               <%= link_to 'Logout', 'logout', method: :delete, class: "nav-item nav-link" %>
+               <%= link_to 'Logout', '/logout', class: "nav-item nav-link" %>
             <% else %>
-               <%= link_to "Sign Up", "signup", class: "nav-item nav-link" %>
-               <%= link_to "Log In", "login", class: "nav-item nav-link" %>       
+               <%= link_to "Sign Up", "/signup", class: "nav-item nav-link" %>
+               <%= link_to "Log In", "/login", class: "nav-item nav-link" %>       
             <% end %>
           </div>
         </div>

@@ -15,24 +15,28 @@ ActiveRecord::Schema.define(version: 20180225024830) do
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "comment"
     t.bigint "ticket_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ticket_id"], name: "index_comments_on_ticket_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "tickets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "task"
     t.text "description"
     t.boolean "is_completed"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "username"
+    t.string "email"
+    t.string "password_digest"
     t.string "firstname"
     t.string "lastname"
-    t.string "google_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

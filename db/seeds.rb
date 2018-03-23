@@ -8,3 +8,5 @@
 
 tickets = Ticket.create([{ task: 'First', description: 'Test description' }])
 comments = Comment.create([{ comment: 'First', ticket_id: 1 }, { comment: 'Second', ticket_id: 1 }, { comment: 'Third', ticket_id: 1 }])
+
+users = User.create([{ email: 'thomas@rahn.ca', firstname: 'Thomas', lastname: 'Rahn', password_digest: BCrypt::Password.create('Password1') } ])
