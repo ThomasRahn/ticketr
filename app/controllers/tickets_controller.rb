@@ -23,9 +23,8 @@ class TicketsController < ApplicationController
   end
 
   def complete
-  	Ticket.find(params[:id]).complete
-
-  	render 'index'
+  	ticket = Ticket.find(params[:id])
+    ticket.update(is_completed: params[:c])
   end
 
   private def post_params

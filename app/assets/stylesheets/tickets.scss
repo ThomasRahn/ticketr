@@ -1,3 +1,22 @@
 // Place all the styles related to the Tickets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.task {
+	padding: 10px;
+	margin: 10px 0px;
+}
+.comments {
+	margin: 10px 0px;
+}
+.comment {
+	padding:10px;
+}
+.task_status {
+  -ms-transform: scale(3); /* IE */
+  -moz-transform: scale(3); /* FF */
+  -webkit-transform: scale(3); /* Safari and Chrome */
+  -o-transform: scale(3); /* Opera */
+  margin:10px;
+}

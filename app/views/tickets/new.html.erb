@@ -1,5 +1,5 @@
-<div class="row justify-content-md-center">
-  <div class="col col-lg-6">
+<div class="row">
+  <div class="col col-lg-12">
 	<%= form_for @ticket, url: {action: "create"}, html: {class: "nifty_form"} do |t| %>
 		<% if @ticket.errors.any? %>
 			<% @ticket.errors.full_messages.each do |msg| %>

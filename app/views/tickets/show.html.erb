@@ -1,21 +1,28 @@
 <div class="row justify-content-md-center">
-  <div class="col col-lg-6">
-    <h2><%= @ticket.task %></h2>
+  <div class="col col-lg-7">
+    <div class="task">
+      <%= check_box_tag '', 1, @ticket.is_completed, :onclick => "complete()", class: 'float-left task_status' %>
+      <h2><%= @ticket.task %></h2>
 
-    <a href="javascript:void(0)" onclick="complete(1);">FINISH</a>
-    <% @ticket.comments.each do |comment| %>
-      <h3><%= comment.comment %>
-    <% end %>
+      <p><%= @ticket.description %></p>
+    </div>
+    <div class="comments">
+      
+      <% @ticket.comments.each do |comment| %>
+        <p class="comment"><%= comment.comment %></p>
+      <% end %>
+    </div>
   </div>
 </div>
 
 <script type="text/javascript">
-  function complete(ticket_id){
+  function complete(){
     $.ajax({
       url : '/complete',
       type : "POST",
       data : {
-        id : ticket_id
+        id : <%= @ticket.id %>,
+        c : $(".task_status").is(":checked")
       },
       success : function(data){
         alert("good");
