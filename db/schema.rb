@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20180225024830) do
   create_table "tickets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "task"
     t.text "description"
-    t.boolean "is_completed"
+    t.boolean "is_completed", default: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
