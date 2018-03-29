@@ -15,13 +15,10 @@
 
     <div class="leave_a_comment">
       <h3>Leave a comment</h3>
-      <form action="/comment" method="POST">
-        <input type="hidden" name="id" value="<%= @ticket.id %>"/>
-        <div class="form-group">
-          <textarea class="form-control comment"></textarea>
-        </div>
-      <button class="btn btn-primary float-right">Post</button>
-      </form>
+      <div class="form-group">
+        <textarea class="form-control comment_text"></textarea>
+      </div>
+      <button class="btn btn-primary float-right" onclick="comment()">Post</button>
   </div>
 </div>
 
@@ -35,8 +32,28 @@
         c : $(".task_status").is(":checked")
       },
       success : function(data){
-        alert("good");
       }
     });
+  }
+
+  function comment()
+  {
+    var c = $(".comment_text").val();
+    $.ajax({
+      url : '/comment',
+      type : 'post',
+      data : {
+        comment : c,
+        ticket_id : <%= @ticket.id %>
+      },
+      success : function(data){
+        var new_c = 
+          $("<p>")
+            .addClass("comment")
+            .html(data.comment);
+        $(".comments").append(new_c);
+        $(".comment_text").val("");
+      }
+    })
   }
  </script>
