@@ -15,10 +15,13 @@
 
     <div class="leave_a_comment">
       <h3>Leave a comment</h3>
-      <div class="form-group">
-        <textarea class="form-control"></textarea>
-      </div>
-      <a href="javascript:void(0);" class="btn btn-primary float-right">Post</a>
+      <form action="/comment" method="POST">
+        <input type="hidden" name="id" value="<%= @ticket.id %>"/>
+        <div class="form-group">
+          <textarea class="form-control comment"></textarea>
+        </div>
+      <button class="btn btn-primary float-right">Post</button>
+      </form>
   </div>
 </div>
 
@@ -36,4 +39,4 @@
       }
     });
   }
-</script>
+ </script>

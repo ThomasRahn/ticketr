@@ -1,11 +1,21 @@
-<% @tickets.each do |ticket| %>
-  <div class="row justify-content-md-center">
-    <div class="col col-lg-6">
-      <h2><%= link_to ticket.task, controller: "tickets", action: "show", id: ticket.id %></h2>
-      <hr/>
-      <p>
-        <%= ticket.description %>
-      </p>
-    </div>
-  </div>
+<% if @tickets.length > 0 %>
+	<div class="row justify-content-md-center">
+		<div class="col col-lg-8">
+			<h1>Here is what is on your plate</h1>
+		</div>
+	</div>
+	<% @tickets.each do |ticket| %>
+	  <div class="row justify-content-md-center">
+	    <div class="col col-lg-6">
+	      <h2><%= link_to ticket.task, controller: "tickets", action: "show", id: ticket.id %></h2>
+	      <hr/>
+	      <p>
+	        <%= ticket.description %>
+	      </p>
+	    </div>
+	  </div>
+	<% end %>
+<% else %>
+	<h1>There is nothing on your plate</h1>
+	<%= link_to "Add something",{:controller => "tickets", :action => "new"}, { class: "btn btn-link", role: "button"} %>
 <% end %>

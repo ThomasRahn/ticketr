@@ -1,7 +1,7 @@
 class TicketsController < ApplicationController
   
   def index
-    @tickets = Ticket.all
+    @tickets = Ticket.where({ is_completed: 0})
   end
 
   def show
