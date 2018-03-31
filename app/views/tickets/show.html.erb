@@ -9,7 +9,18 @@
     <div class="comments">
       
       <% @ticket.comments.each do |comment| %>
-        <p class="comment"><%= comment.comment %></p>
+        <div class="comment_box">
+          <div>
+            <b class="author">
+              <%= comment.user.firstname %>
+            </b> 
+            at 
+            <span class="date">
+              <%= localize(comment.created_at, :format => :long) %>
+            </span>
+          </div>
+          <p class="comment"><%= comment.comment %></p>
+        </div>
       <% end %>
     </div>
 
@@ -21,7 +32,10 @@
       <button class="btn btn-primary float-right" onclick="comment()">Post</button>
   </div>
 </div>
-
+<div class="comment_box comment_box_clonable" style="display: none;">
+  <div><b class="author"></b> at <span class="date"></span></div>
+  <p class="comment"></p>
+</div>
 <script type="text/javascript">
   function complete(){
     $.ajax({
@@ -47,13 +61,20 @@
         ticket_id : <%= @ticket.id %>
       },
       success : function(data){
-        var new_c = 
-          $("<p>")
-            .addClass("comment")
-            .html(data.comment);
-        $(".comments").append(new_c);
+        create_comment_box(data);
         $(".comment_text").val("");
       }
     })
+  }
+
+  function create_comment_box(comment_data){
+    var c_box = $(".comment_box_clonable").clone();
+    c_box.removeClass("comment_box_clonable")
+        .css("display", "block");
+
+    c_box.find(".comment").html(comment_data.comment);
+    c_box.find(".author").html(comment_data.username);
+    c_box.find(".date").html(comment_data.created_at);
+    $(".comments").append(c_box);
   }
  </script>
