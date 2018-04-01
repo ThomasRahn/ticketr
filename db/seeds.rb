@@ -6,8 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-tickets = Ticket.create([{ task: 'First', description: 'Test description' }])
+users = User.create([{ email: 'thomas@rahn.ca', firstname: 'Thomas', lastname: 'Rahn', password_digest: BCrypt::Password.create('Password1') } ])
 
-users = User.create([{ id: 1, email: 'thomas@rahn.ca', firstname: 'Thomas', lastname: 'Rahn', password_digest: BCrypt::Password.create('Password1') } ])
+projects = Project.create([{code: "test", name: "Test", description: "This is a test project", user_id: users.first.id }])
 
-comments = Comment.create([{ comment: 'First', ticket_id: 1, user_id: 1 }, { comment: 'Second', ticket_id: 1, user_id: 1 }, { comment: 'Third', ticket_id: 1, user_id: 1 }])
+tickets = Ticket.create([{ task: 'First', description: 'Test description', user_id: users.first.id, project_id: projects.first.id }])
+
+comments = Comment.create([{ comment: 'First', ticket_id: tickets.first.id, user_id: users.first.id }, 
+			{ comment: 'Second', ticket_id: tickets.first.id, user_id: users.first.id }, 
+			{ comment: 'Third', ticket_id: tickets.first.id, user_id: users.first.id }])
