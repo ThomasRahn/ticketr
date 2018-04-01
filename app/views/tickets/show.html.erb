@@ -67,14 +67,14 @@
     })
   }
 
-  function create_comment_box(comment_data){
+  function create_comment_box(data){
     var c_box = $(".comment_box_clonable").clone();
     c_box.removeClass("comment_box_clonable")
         .css("display", "block");
 
-    c_box.find(".comment").html(comment_data.comment);
-    c_box.find(".author").html(comment_data.username);
-    c_box.find(".date").html(comment_data.created_at);
+    c_box.find(".comment").html(data.comment.comment);
+    c_box.find(".author").html(data.username);
+    c_box.find(".date").html(data.date);
     $(".comments").append(c_box);
   }
  </script>
