@@ -37,7 +37,7 @@
               <li class="nav-item"><%= active_link_to "New", { "controller" => "tickets", "action" => "new"}, { class: "nav-link"} %></li>
             </ul>
               <ul class="navbar-nav">
-              <li class="nav-item"><%= active_link_to 'Logout', '/logout', class: "nav-link" %></li>
+              <li class="nav-item"><%= link_to 'Logout', '/logout', class: "nav-link" %></li>
             <% else %>
               </ul>
               <ul class="navbar-nav">

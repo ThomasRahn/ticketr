@@ -1,7 +1,9 @@
 <div class="row justify-content-md-center">
   <div class="col col-lg-7">
     <div class="task">
-      <%= check_box_tag '', 1, @ticket.is_completed, :onclick => "complete()", class: 'float-left task_status' %>
+      <% if logged_in? %>
+        <%= check_box_tag '', 1, @ticket.is_completed, :onclick => "complete()", class: 'float-left task_status' %>
+      <% end %>
       <h2><%= @ticket.task %></h2>
 
       <p><%= @ticket.description %></p>
@@ -24,57 +26,66 @@
       <% end %>
     </div>
 
-    <div class="leave_a_comment">
-      <h3>Leave a comment</h3>
-      <div class="form-group">
-        <textarea class="form-control comment_text"></textarea>
+    <% if logged_in? %>
+      <div class="leave_a_comment">
+        <h3>Leave a comment</h3>
+        <div class="form-group">
+          <textarea class="form-control comment_text"></textarea>
+        </div>
+        <button class="btn btn-primary float-right" onclick="comment()">Post</button>
       </div>
-      <button class="btn btn-primary float-right" onclick="comment()">Post</button>
-  </div>
+
+      <div class="comment_box comment_box_clonable" style="display: none;">
+        <div><b class="author"></b> at <span class="date"></span></div>
+        <p class="comment"></p>
+      </div>
+    <% else %>
+      <div>
+        <p>Please log in to leave a comment</p>
+      </div>
+    <% end %>
 </div>
-<div class="comment_box comment_box_clonable" style="display: none;">
-  <div><b class="author"></b> at <span class="date"></span></div>
-  <p class="comment"></p>
-</div>
-<script type="text/javascript">
-  function complete(){
-    $.ajax({
-      url : '/complete',
-      type : "POST",
-      data : {
-        id : <%= @ticket.id %>,
-        c : $(".task_status").is(":checked")
-      },
-      success : function(data){
-      }
-    });
-  }
+<% if logged_in? %>
+  <script type="text/javascript">
+    function complete(){
+      $.ajax({
+        url : '/complete',
+        type : "POST",
+        data : {
+          id : <%= @ticket.id %>,
+          c : $(".task_status").is(":checked")
+        },
+        success : function(data){
+        }
+      });
+    }
 
-  function comment()
-  {
-    var c = $(".comment_text").val();
-    $.ajax({
-      url : '/comment',
-      type : 'post',
-      data : {
-        comment : c,
-        ticket_id : <%= @ticket.id %>
-      },
-      success : function(data){
-        create_comment_box(data);
-        $(".comment_text").val("");
-      }
-    })
-  }
+    function comment()
+    {
+      var c = $(".comment_text").val();
+      $.ajax({
+        url : '/comment',
+        type : 'post',
+        data : {
+          comment : c,
+          ticket_id : <%= @ticket.id %>
+        },
+        success : function(data){
+          create_comment_box(data);
+          $(".comment_text").val("");
+        }
+      })
+    }
 
-  function create_comment_box(data){
-    var c_box = $(".comment_box_clonable").clone();
-    c_box.removeClass("comment_box_clonable")
-        .css("display", "block");
+    function create_comment_box(data){
+      var c_box = $(".comment_box_clonable").clone();
+      c_box.removeClass("comment_box_clonable")
+          .css("display", "block");
 
-    c_box.find(".comment").html(data.comment.comment);
-    c_box.find(".author").html(data.username);
-    c_box.find(".date").html(data.date);
-    $(".comments").append(c_box);
-  }
- </script>
+      c_box.find(".comment").html(data.comment.comment);
+      c_box.find(".author").html(data.username);
+      c_box.find(".date").html(data.date);
+      $(".comments").append(c_box);
+    }
+  </script>
+<% end %>
