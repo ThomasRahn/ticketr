@@ -1,0 +1,11 @@
+<h1><%= @project.name %></h1>
+<p><%= @project.description %></p>
+<h2>Requests</h2>
+
+<div class="ticket-list">
+  <% @project.tickets.each do |ticket| %>
+    <div class="ticket-item">
+      <%= ticket.task %>
+    </div>      
+  <% end %>
+</div>
