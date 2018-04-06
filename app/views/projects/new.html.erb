@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col col-lg-12">
+	<%= form_for @project, url: {action: "create"}, html: {class: "nifty_form"} do |t| %>
+		<% if @project.errors.any? %>
+			<% @project.errors.full_messages.each do |msg| %>
+				<div class='alert alert-danger'>
+					<%= msg %>
+				</div>
+			<% end %>
+		<% end %>
+
+	  <div class="form-group">
+	  	<%= label_tag(:name, "Project Name") %>
+	  	<%= t.text_field :name, class: "form-control" %>
+	  </div>
+	  <div class="form-group">
+	  	<%= label_tag(:user_id, "Project Leader") %>
+	  	<select name="user_id" class="form-control">
+	  		<% @users.each do |user| %>
+	  			<option value="<%= user.id %>"><%= user.firstname %></option>
+	  		<% end %>
+	  	</select>
+	  </div>
+	  <div class="form-group">
+	  	<%= label_tag(:description, "Project Description") %>
+	  	<%= t.text_area :description, size: "60x12", class: "form-control" %>
+	  </div>
+	  
+	  <%= t.submit "Create", class: "btn btn-primary" %>
+	<% end %>
+  </div>
+</div>

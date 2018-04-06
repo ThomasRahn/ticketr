@@ -3,17 +3,18 @@
 
 <div class="row">
   <div class="col col-offset-3 col-lg-6">
-
-    <h2>Things to do</h2>
-    <div class="ticket-list">
-      <% @project.tickets.each do |ticket| %>
-        <div class="ticket-item">
-          <%= link_to controller: "tickets", action: "show", id: ticket.id do %>
-            <span class="fa fa-list-ul"></span>
-            <label><%= ticket.task %></label>
-          <% end %>
-        </div>      
-      <% end %>
-    </div>
+    <% if @project.tickets.length > 0 %>
+      <h2>Things to do</h2>
+      <div class="ticket-list">
+        <% @project.tickets.each do |ticket| %>
+          <div class="ticket-item">
+            <%= link_to controller: "tickets", action: "show", id: ticket.id do %>
+              <span class="fa fa-list-ul"></span>
+              <label><%= ticket.task %></label>
+            <% end %>
+          </div>      
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>

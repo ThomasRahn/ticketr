@@ -36,7 +36,7 @@
             <li class="nav-item"><%= active_link_to "Home", "/", class: "nav-link", active: :exclusive %></li>
 
             <% if logged_in? %>
-              <li class="nav-item"><%= active_link_to "New", { "controller" => "tickets", "action" => "new"}, { class: "nav-link"} %></li>
+              <li class="nav-item"><%= active_link_to "New", { "controller" => "projects", "action" => "new"}, { class: "nav-link"} %></li>
             <% end %>
           </ul>
           <ul class="navbar-nav">
