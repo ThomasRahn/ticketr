@@ -1,8 +1,15 @@
-<h1><%= @project.name %></h1>
-<p><%= @project.description %></p>
+<div class="row">
+  <div class="col offset-lg-2 col-lg-6">
+    <h1><%= @project.name %></h1>
+    <p><%= @project.description %></p>
+  </div>
+  <div class="col col-lg-2">
+    <%= active_link_to "New Task", { "controller" => "tickets", "action" => "new"}, { class: "btn btn-secondary" }%>
+  </div>
+</div>
 
 <div class="row">
-  <div class="col col-offset-3 col-lg-6">
+  <div class="col offset-lg-3 col-lg-6">
     <% if @project.tickets.length > 0 %>
       <h2>Things to do</h2>
       <div class="ticket-list">

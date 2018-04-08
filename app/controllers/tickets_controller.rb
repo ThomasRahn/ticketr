@@ -10,14 +10,21 @@ class TicketsController < ApplicationController
 
   def new
   	@ticket = Ticket.new
+    @projects = Project.all
+    @users = User.all
   end
 
   def create
   	@ticket = Ticket.new(post_params)
 
+    @ticket.user_id =params[:user]
+    @ticket.project_id = params[:project]
+
   	if(@ticket.save)
-  		redirect_to @ticket
+  		redirect_to @ticket.project
   	else
+      @projects = Project.all
+      @users = User.all
   		render 'new'
   	end
   end
