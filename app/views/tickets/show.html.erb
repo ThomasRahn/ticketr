@@ -11,7 +11,11 @@
     <div class="comments">
       
       <% @ticket.comments.each do |comment| %>
-        <div class="comment_box">
+
+        <div class="comment_box" id="comment_<%= comment.id %>" data-id="<%= comment.id %>">
+          <% if logged_in? %>        
+            <a href="javascript:void(0);" onclick="delete_comment($(this));">X</a>
+          <% end %>
           <div>
             <b class="author">
               <%= comment.user.firstname %>
@@ -59,6 +63,16 @@
         }
       });
     }
+    function delete_comment(c){
+      var c_id = $(c).parent().attr("data-id");
+      $.ajax({
+        url : '/comment/' + c_id,
+        type : 'DELETE',
+        success : function(data){
+          $("#comment_" + c_id).remove();
+        }
+      })
+    }
 
     function comment()
     {
@@ -82,6 +96,8 @@
       c_box.removeClass("comment_box_clonable")
           .css("display", "block");
 
+      c_box.attr("id", "comment_" + data.comment.id);
+      c_box.attr("data-id", data.comment.id);
       c_box.find(".comment").html(data.comment.comment);
       c_box.find(".author").html(data.username);
       c_box.find(".date").html(data.date);

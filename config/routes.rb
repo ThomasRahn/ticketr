@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post 'comment', to: 'comments#create'
   post 'complete', to: 'tickets#complete'
 
+  delete '/comment/:id', to: 'comments#destroy'
+
   resources :tickets
   resources :comments
   resources :sessions

@@ -14,4 +14,17 @@ class CommentsController < ApplicationController
   		render json: { "success" => false }
   	end
   end
+
+  def destroy
+    comment = Comment.find(params[:id])
+    user = session[:user_id]
+
+    if comment.user_id == user then
+      comment.delete
+      render json: { "success" => true }
+    else
+      render json: { "success" => false, "error" => "Not your comment" }
+    end
+
+  end
 end
