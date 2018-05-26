@@ -38,3 +38,6 @@ body {
 	padding: 10px;
 	margin: 15px 20px;
 }
+.display_name:hover {
+	cursor: default;
+}
