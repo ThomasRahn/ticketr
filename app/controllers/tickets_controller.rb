@@ -41,7 +41,7 @@ class TicketsController < ApplicationController
     @ticket.description = params[:description]
     @ticket.user_id = params[:user]
 
-    @ticket.save(validate: false) 
+    @ticket.save
 
     render :action => "show"
   end
