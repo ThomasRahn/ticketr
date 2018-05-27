@@ -29,6 +29,23 @@ class TicketsController < ApplicationController
   	end
   end
 
+  def edit 
+    @ticket = Ticket.includes(:user).find(params[:id])    
+    @users = User.all
+  end
+
+  def update
+    @ticket = Ticket.includes(comments: :user).find(params[:id])
+
+    @ticket.task = params[:task]
+    @ticket.description = params[:description]
+    @ticket.user_id = params[:user]
+
+    @ticket.save(validate: false) 
+
+    render :action => "show"
+  end
+
   def complete
   	ticket = Ticket.find(params[:id])
     ticket.update(is_completed: params[:c])

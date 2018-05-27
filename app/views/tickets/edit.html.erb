@@ -1,0 +1,24 @@
+<div class="row justify-content-md-center">
+  <div class="col col-lg-7">
+    <%= form_for @ticket, url: {action: "update"}, html: {class: "nifty_form"} do |t| %>
+      <div class="task">
+        <div class="form-group">
+          <input type="text" class="form-control" name="task" value="<%= @ticket.task %>">
+        </div>
+
+        <div class="form-group">
+          <select class="form-control" name="user">
+            <option value="-1">No one</option>
+            <% @users.each do |u| %>
+              <option value="<%= u.id %>" <%= @ticket.user_id == u.id ? "selected" : "" %> ><%= u.firstname + " " + u.lastname %></option>
+            <% end %>
+          </select>
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" name="description"><%= @ticket.description %></textarea>
+        </div>
+      </div>
+      <%= t.submit "Save", class: "btn btn-primary pull-right" %>
+    <% end %>
+  </div>
+</div>

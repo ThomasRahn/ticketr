@@ -5,7 +5,16 @@
         <%= check_box_tag '', 1, @ticket.is_completed, :onclick => "complete()", class: 'float-left task_status' %>
       <% end %>
       <h2><%= @ticket.task %></h2>
+      
+      <%= link_to "Edit", { controller: "tickets", action: "edit", id: @ticket.id }, :class => "btn btn-primary pull-right" %>
 
+      <p>Assigned to: 
+        <% if !@ticket.user.nil? %> 
+          <%= @ticket.user.firstname %>
+        <% else %>
+          No one
+        <% end %>  
+      </p>
       <p><%= @ticket.description %></p>
     </div>
     <div class="comments">
